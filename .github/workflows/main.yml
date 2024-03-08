@@ -1,0 +1,23 @@
+name: github-actions
+on: [push]
+
+jobs:
+  build:
+   runs-on: ubuntu-latest
+
+   steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setup-Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+    - name: Install
+      run: |
+        yarn global add typescript
+        yarn add lodash @types/lodash
+        yarn install
+    - name: Build and Run
+      run: |
+        yarn run tsc
+        node sample.js
