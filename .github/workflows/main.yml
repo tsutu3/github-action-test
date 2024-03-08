@@ -12,12 +12,14 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 18
-    - name: Install
-      run: |
-        yarn global add typescript
-        yarn add lodash @types/lodash
-        yarn install
-    - name: Build and Run
-      run: |
-        yarn run tsc
-        node sample.js
+      - name: Run
+        run: docker run --rm -v "$(pwd)":/usr/src/app -w /usr/src/app node:latest sh -c "yarn global add typescript && yarn add lodash @types/lodash && tsc && node sample.js"
+    # - name: Install
+    #   run: |
+    #     yarn global add typescript
+    #     yarn add lodash @types/lodash
+    #     yarn install
+    # - name: Build and Run
+    #   run: |
+    #     yarn run tsc
+    #     node sample.js
