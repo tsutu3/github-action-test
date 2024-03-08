@@ -18,8 +18,6 @@ jobs:
     #   run: docker run --rm -v "$(pwd)":/usr/src/app -w /usr/src/app node:latest sh -c "yarn global add typescript && yarn add lodash @types/lodash && tsc && node sample.js"
     - name: Install
       run: |
-        yarn add typescript
-        yarn add lodash @types/lodash
         yarn install
     - name: Build and Run
       run: |
