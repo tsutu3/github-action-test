@@ -5,7 +5,8 @@ jobs:
   build:
    runs-on: ubuntu-latest
    container: #起動するコンテナイメージを指定
-      image: node:16.14.0
+      # image: node:16.14.0
+      image: cimg/node:16.20.2
 
    steps:
     - name: Checkout
