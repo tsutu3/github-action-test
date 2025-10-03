@@ -1,0 +1,15 @@
+name: test
+
+on:
+ workflow_call:
+
+jobs:
+  test:
+   runs-on: ubuntu-22.04
+   steps:
+     - name: check
+       uses: actions/checkout@v4
+     - name: test
+       run: |
+         echo ${{ github.event.inputs.testes }}
+         echo  ${{ inputs.testes }}
