@@ -20,5 +20,3 @@ jobs:
          echo  ${{ inputs.testes }}
   call:
     uses: ./.github/workflows/call.yml
-    with:
-      target: ${{ inputs.testes }} 
