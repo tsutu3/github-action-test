@@ -2,11 +2,11 @@ name: call
 
 on:
  workflow_call:
- 　　inputs:
-   　target:
-     　　description: 'Target parameter'
-     　　required: true
-     　　type: string
+   inputs:
+     target:
+       description: 'Target parameter'
+       required: true
+       type: string
 
 jobs:
   test:
