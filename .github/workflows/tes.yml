@@ -18,7 +18,7 @@ jobs:
        run: |
          echo ${{ github.event.inputs.testes }}
          echo  ${{ inputs.testes }}
-  # call:
-  #   uses: ./.github/workflows/call.yml
-  #   with:
-  #     target: 
+  call:
+    uses: ./.github/workflows/call.yml
+    with:
+      target: ${{ github.event.inputs.testes }}
