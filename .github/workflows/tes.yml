@@ -13,7 +13,7 @@ jobs:
    runs-on: ubuntu-22.04
    steps:
      - name: check
-       uses: actions:checkout@v4
+       uses: actions/checkout@v4
      - name: test
        run: |
          echo ${{ github.event.inputs.testes }}
