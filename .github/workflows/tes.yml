@@ -21,4 +21,4 @@ jobs:
   call:
     uses: ./.github/workflows/call.yml
     with:
-      target: ${{ github.event.inputs.testes }}
+      target: ${{ inputs.testes }} 
