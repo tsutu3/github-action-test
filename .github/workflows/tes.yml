@@ -1,0 +1,20 @@
+name: test
+
+on:
+ workfolow_dispatch:
+  inputs:
+    testes:
+      type: string
+      required: false
+      description: aaa
+
+jobs:
+  test:
+  runs-on: ubuntu-22.04
+  steps:
+    - name: check
+      uses: actions:checkout@v4
+    - name: test
+      run: |
+        echo ${{ github.event.inputs.testes }}
+        echo  ${{ github.event.inputs.testes }}
