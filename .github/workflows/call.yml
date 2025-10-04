@@ -3,14 +3,14 @@ name: call
 on:
   workflow_call:
     inputs: # 呼び出し元のワークフローから受け取る入力を定義
-      target: # 呼び出し元が 'with: target: ...' で渡す値
+      input_value: # 呼び出し元が 'with: target: ...' で渡す値
         required: false
         type: string
         default: 'default_target_value'
-      testes: # 呼び出し元の workflow_dispatch input と同じ名前の入力を定義（推奨）
+      env_value:
         required: false
         type: string
-        default: 'default_testes_value'
+        default: 'env_value'
 
 jobs:
   test:
@@ -20,11 +20,14 @@ jobs:
         uses: actions/checkout@v4
       - name: test
         run: |
-          # 1. 呼び出し元から渡された 'target' の値を参照
-          echo "Target value from caller: ${{ inputs.target }}"
+          # 1. 呼び出し元から渡された 'input_value' の値を参照
+          echo "input_value from caller: ${{ inputs.input_value }}"
 
-          # 2. 呼び出し元から渡された 'testes' の値を参照
-          echo "Testes value from caller: ${{ inputs.testes }}"
+          # 2. 呼び出し元から渡された 'env_value' の値を参照
+          echo "Testes value from caller: ${{ inputs.env_value}}"
+
+          # 3. 環境変数から
+          echo "env: $TARGET"
 
           # 注意: github.event.inputs は workflow_call では使用できません。
           # 'inputs' コンテキストを使用してください。

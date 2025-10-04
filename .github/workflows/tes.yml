@@ -33,5 +33,5 @@ jobs:
     uses: ./.github/workflows/call.yml
     # もし call.yml 側にパラメータを渡す場合は 'with:' を使います。
     with:
-      target: ${{ inputs.testes }}
-      testes:
+      input_value: ${{ inputs.testes }}
+      env_value: "$TARGET"
