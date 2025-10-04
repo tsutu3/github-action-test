@@ -1,3 +1,21 @@
+# name: env
+
+# inputs:
+#   test_name:
+#     required: true
+#     type: string
+
+# runs:
+#   using: 'composite'
+#   steps:
+#     - name: env
+#       shell: bash
+#       run: |
+#         echo "TARGET=${test_name}" >> "$GITHUB_ENV"
+#         echo "$TARGET"
+
+# 修正後の action.yml
+
 name: env
 
 inputs:
@@ -11,5 +29,8 @@ runs:
     - name: env
       shell: bash
       run: |
-        echo "TARGET=${test_name}" >> "$GITHUB_ENV"
-        echo "$TARGET"
+        # 1. 入力値の参照を修正: ${{ inputs.test_name }} を使う
+        echo "TARGET=${{ inputs.test_name }}" >> "$GITHUB_ENV"
+        # 2. $TARGET の出力は、このステップ内では意味がないため削除するか、
+        #    代わりに渡された入力値を出力する（デバッグ用）
+        echo "入力として渡された値: ${{ inputs.test_name }}"
