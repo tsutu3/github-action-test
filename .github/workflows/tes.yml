@@ -1,22 +1,31 @@
+# .github/workflows/tes.yml (修正済み)
+
 name: test
 
 on:
- workflow_dispatch:
-  inputs:
-    testes:
-      type: string
-      required: false
-      description: aaa
+  workflow_dispatch:
+    inputs:
+      testes:
+        type: string
+        required: false
+        description: aaa
 
 jobs:
+  # 1. 'test' ジョブの定義
   test:
-   runs-on: ubuntu-22.04
-   steps:
-     - name: check
-       uses: actions/checkout@v4
-     - name: test
-       run: |
-         echo ${{ github.event.inputs.testes }}
-         echo  ${{ inputs.testes }}
-  call:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: check
+        uses: actions/checkout@v4
+      - name: test
+        run: |
+          # 実行ステップ内では、inputsコンテキストと github.event.inputs コンテキストのどちらも使えます。
+          echo "github.event.inputs.testes: ${{ github.event.inputs.testes }}"
+          echo "inputs.testes: ${{ inputs.testes }}"
+
+  # 2. 'call' ジョブの定義 (再利用可能なワークフローを呼び出すジョブ)
+  call_workflow: # ジョブには必ず名前をつけます
     uses: ./.github/workflows/call.yml
+    # もし call.yml 側にパラメータを渡す場合は 'with:' を使います。
+    # with:
+    #   target: ${{ inputs.testes }}
