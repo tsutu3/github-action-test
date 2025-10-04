@@ -5,12 +5,16 @@ on:
 
 jobs:
   test:
-   runs-on: ubuntu-22.04
-   steps:
-     - name: check
-       uses: actions/checkout@v4
-     - name: test
-       run: |
-         echo ${{ github.event.inputs.testes }}
-         echo  ${{ inputs.testes }}
-         echo "$target"
+  runs-on: ubuntu-22.04
+  steps:
+    - name: check
+      uses: actions/checkout@v4
+    - name: env config
+      uses: ./env
+      with:
+        test_name: "test"
+    - name: test
+      run: |
+        echo ${{ github.event.inputs.testes }}
+        echo  ${{ inputs.testes }}
+        echo "$target"

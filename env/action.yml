@@ -1,0 +1,14 @@
+name: env
+
+inputs:
+  test_name:
+    required: true
+    type: string
+
+runs:
+  steps:
+    - name: env
+      shell: bash
+      run: |
+        echo "TARGET=${test_name}" >> "$GITHUB_ENV"
+        echo "$TARGET"
