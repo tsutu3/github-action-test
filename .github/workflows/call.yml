@@ -2,19 +2,29 @@ name: call
 
 on:
   workflow_call:
+    inputs: # 呼び出し元のワークフローから受け取る入力を定義
+      target: # 呼び出し元が 'with: target: ...' で渡す値
+        required: false
+        type: string
+        default: 'default_target_value'
+      testes: # 呼び出し元の workflow_dispatch input と同じ名前の入力を定義（推奨）
+        required: false
+        type: string
+        default: 'default_testes_value'
 
 jobs:
   test:
-  runs-on: ubuntu-22.04
-  steps:
-    - name: check
-      uses: actions/checkout@v4
-    - name: env config
-      uses: ./env
-      with:
-        test_name: "test"
-    - name: test
-      run: |
-        echo ${{ github.event.inputs.testes }}
-        echo  ${{ inputs.testes }}
-        echo "$target"
+    runs-on: ubuntu-22.04 # runs-on はジョブID (test) の直下にインデントが必要
+    steps:
+      - name: check
+        uses: actions/checkout@v4
+      - name: test
+        run: |
+          # 1. 呼び出し元から渡された 'target' の値を参照
+          echo "Target value from caller: ${{ inputs.target }}"
+
+          # 2. 呼び出し元から渡された 'testes' の値を参照
+          echo "Testes value from caller: ${{ inputs.testes }}"
+
+          # 注意: github.event.inputs は workflow_call では使用できません。
+          # 'inputs' コンテキストを使用してください。
